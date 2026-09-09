@@ -1,0 +1,29 @@
+name: Build Wasfaty IPA
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Build TrollStore IPA
+        run: bash scripts/build_ipa.sh
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: Wasfaty_iOS15_TrollStore
+          path: build/Wasfaty_iOS15_TrollStore.ipa
+          if-no-files-found: error
+          retention-days: 30
