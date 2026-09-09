@@ -14,6 +14,7 @@ echo "Using iPhoneOS SDK: $SDK"
 
 xcrun --sdk iphoneos swiftc \
   "$ROOT_DIR/Sources/WasfatyApp.swift" \
+  -parse-as-library \
   -sdk "$SDK" \
   -target arm64-apple-ios15.0 \
   -O \
